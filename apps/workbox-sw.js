@@ -850,7 +850,7 @@ define("./workbox-sw.js", [], (function() {
             url: "/apps/domguard.js",
             revision: "4632dba44fb7a4a866f133453cd60fc4"
         }, {
-            url: "f2f.js",
+            url: "swapp.js",
             revision: "e72c71b27f637349b48cb58830254128"
         }, {
             url: "/apps/he.js",
