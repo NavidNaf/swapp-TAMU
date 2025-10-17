@@ -84,8 +84,15 @@ Storage.prototype.set = function(key, value) {
     });
 };
 
-Storage.prototype.delete = function(key, value) {
-    indexedDB.deleteDatabase(location.origin);
+Storage.prototype.delete = function(key) {
+    var obj = this;
+    return this.ready.then(() => {
+        return new Promise((resolve, reject) => {
+            var request = obj.getStore().delete(key);
+            request.onsuccess = resolve;
+            request.onerror = reject;
+        });
+    });
 };
 
 // Utility functions (timing measurement) for evaluation only
@@ -139,8 +146,15 @@ EStorage.prototype.set = function(key, value) {
     });
 };
 
-EStorage.prototype.delete = function(key, value) {
-    indexedDB.deleteDatabase(location.origin);
+EStorage.prototype.delete = function(key) {
+    var obj = this;
+    return this.ready.then(() => {
+        return new Promise((resolve, reject) => {
+            var request = obj.getStore().delete(key);
+            request.onsuccess = resolve;
+            request.onerror = reject;
+        });
+    });
 };
 
 let edb = new EStorage();

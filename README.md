@@ -91,6 +91,11 @@ For further details such as app configurations, please see [Apps.](https://githu
 | [NativeEX](https://github.com/cpx0rpc/swapp/tree/main/apps#nativeex)          | Finished | A helper app to modify native APIs in the document context. |
 | [JSONP Guard](https://github.com/cpx0rpc/swapp/tree/main/apps#nativeex)          | Implementing | An application to validate JSONP return value to prevent JSONP XSS Attacks. |
 
+## Bug Fixes
+- Resolved Autofill Guard pattern matching so array entries can correctly register `RegExp` and string filters.
+- Corrected Data Guard tokenization flow by fixing fallback URL handling, updating URL detection to match inline links, and ensuring F2F headers persist without throwing runtime errors.
+- Updated IndexedDB helpers (`Storage.js`) to delete individual keys instead of the entire database for safer cleanup.
+
 ## Composing a SWAPP App
 SWAPP App operates based on events. A skeleton app would look like: 
 

@@ -88,7 +88,7 @@ async function generateDGTokenForURL(url){
         }
         retval = token;
     } else {
-        reval = url;
+        retval = url;
     }
 
     return retval;
@@ -118,7 +118,7 @@ async function generateDGTokenForTokens(token){
 }
 
 function identifyURLs(text){
-    const reg_regular_url = /^[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:[0-9]{1,5})?[-a-zA-Z0-9()@:%_\\\+\.~#?&//=]*$/g;
+    const reg_regular_url = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:[0-9]{1,5})?[-a-zA-Z0-9()@:%_\\\+\.~#?&//=]*/g;
     var urls = [...text.matchAll(reg_regular_url)];
 
     return urls;
@@ -210,7 +210,7 @@ appObj.respAction = async function(fObject){
             } else {
                 store.put({
                           entry: "F2F",
-                          value: new_cookies
+                          value: new_f2f_header
                 });
             }
         }

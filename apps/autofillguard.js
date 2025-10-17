@@ -33,13 +33,13 @@ autofillguard.respMatch = function(fObj)
 
 	if(autofillguard.respMatchPath.constructor === Array)
 	{
-		for(p in autofillguard.respMatchPath)
-		{ 
-			if(p.constructor === RegExp && urlString.match(p))
+		for(const candidate of autofillguard.respMatchPath)
+		{
+			if(candidate instanceof RegExp && urlString.match(candidate))
 			{
 				return true;
 			}
-			else if(p.constructor === String && urlString == p)
+			else if(typeof candidate === "string" && urlString === candidate)
 			{
 				return true;
 			}
@@ -54,7 +54,7 @@ autofillguard.respMatch = function(fObj)
 	}
 	else if(autofillguard.respMatchPath.constructor === String)
 	{
-		return urlString == autofillguard.respMatchPath;
+		return urlString === autofillguard.respMatchPath;
 	}
 
 	return false;
@@ -91,24 +91,28 @@ autofillguard.respAction = async function(fObj)
 
 				let matched = false;
 
-				if(autofillguard.actionMatch.constructor === Array)
-				{
-					for(a in autofillguard.actionMatch)
-					{ 
-						if(found.match(a))
-						{
-							matched = true;
+					if(autofillguard.actionMatch.constructor === Array)
+					{
+						for(const action of autofillguard.actionMatch)
+						{ 
+							if(action instanceof RegExp && found.match(action))
+							{
+								matched = true;
+							}
+							else if(typeof action === "string" && found === action)
+							{
+								matched = true;
+							}
 						}
 					}
-				}
-				else if(autofillguard.actionMatch.constructor === RegExp)
-				{
-					matched = found.match(autofillguard.actionMatch);
-				}
-				else if(autofillguard.actionMatch.constructor === String && autofillguard.actionMatch == found)
-				{
-					matched = true;
-				}
+					else if(autofillguard.actionMatch.constructor === RegExp)
+					{
+						matched = !!found.match(autofillguard.actionMatch);
+					}
+					else if(autofillguard.actionMatch.constructor === String && autofillguard.actionMatch === found)
+					{
+						matched = true;
+					}
 
 				if(matched)
 				{
