@@ -1,0 +1,3 @@
+Hello from SWAPP!
+
+Check the browser console for detailed logs produced by the debug demo service worker and app.

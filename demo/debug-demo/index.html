@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SWAPP Debug Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+    pre {
+      background: #f6f8fa;
+      border: 1px solid #d0d7de;
+      padding: 1rem;
+      min-height: 5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>SWAPP Debug Demo</h1>
+  <p>This page registers a SWAPP-powered service worker and logs its activity to the console.</p>
+  <button id="fetch-btn" type="button">Fetch sample text</button>
+  <pre id="output">Click the button to trigger a fetch through SWAPP…</pre>
+
+  <script>
+    console.log('[Debug Demo] Script loaded');
+
+    async function triggerFetch() {
+      console.log('[Debug Demo] Fetch button clicked');
+
+      try {
+        const response = await fetch(`./sample.txt?ts=${Date.now()}`);
+        console.log('[Debug Demo] Fetch completed', response);
+
+        const text = await response.text();
+        console.log('[Debug Demo] Response body', text);
+
+        document.getElementById('output').textContent = text;
+      } catch (err) {
+        console.error('[Debug Demo] Fetch failed', err);
+      }
+    }
+
+    document.getElementById('fetch-btn').addEventListener('click', triggerFetch);
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        console.log('[Debug Demo] Registering service worker…');
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => {
+            console.log('[Debug Demo] Service worker registered', reg.scope);
+          })
+          .catch(err => {
+            console.error('[Debug Demo] Service worker registration failed', err);
+          });
+      });
+    } else {
+      console.warn('[Debug Demo] Service workers are not supported in this browser');
+    }
+  </script>
+</body>
+</html>

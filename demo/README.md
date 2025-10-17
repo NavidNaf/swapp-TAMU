@@ -50,3 +50,9 @@ We provide several a demo page for each of the four apps discussed in the paper.
 
 - Access Cache Guard demo at http://localhost/demo/domguard/index.html.
 - Visit the website for further instructions.
+
+## SWAPP Debug Demo (console logging):
+
+- Access the debug demo at http://localhost/demo/debug-demo/index.html.
+- Open the browser DevTools console to observe detailed logs emitted by the service worker and the SWAPP debug logger app.
+- Click the "Fetch sample text" button to trigger SWAPP's fetch pipeline and view the logged request/response flow.
